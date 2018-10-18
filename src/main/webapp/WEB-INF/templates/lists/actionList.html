@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta charset="ISO-8859-1">
+
+    <title>Lashmaker</title>
+</head>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h4>Add Action</h4>
+
+<table class="table table-hover table-condensed">
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>actionName</th>
+        <th>description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="action : ${actions}">
+        <td th:text="${action.id}"></td>
+        <td th:text="${action.actionName}"></td>
+        <td th:text="${action.description}"></td>
+    </tr>
+    </tbody>
+</table>
+
+
+<form action="#" th:action="@{/addaction}" th:object="${action}" method="POST">
+
+    Action name<input type="text" th:field="*{actionName}"/>
+    <br>
+    Description<input type="text" th:field="*{description}" />
+    <br>
+    <input type="submit" value="Submit"/>
+</form>
+
+</body>
+</html>

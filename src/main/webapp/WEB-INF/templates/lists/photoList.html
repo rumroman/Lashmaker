@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta charset="ISO-8859-1">
+
+    <title>Lashmaker</title>
+</head>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h4>Add Photo</h4>
+
+<table class="table table-hover table-condensed">
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>Url</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="photo : ${photos}">
+        <td th:text="${photo.id}"></td>
+        <td th:text="${photo.url}"></td>
+    </tr>
+    </tbody>
+</table>
+
+
+<form action="#" th:action="@{/lists/addphoto}" th:object="${photo}" method="POST">
+
+    Url<input type="text" th:field="*{url}"/>
+    <br>
+    <input type="submit" value="Submit"/>
+</form>
+
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" >
+<head lang="en" >
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+    <meta charset="ISO-8859-1">
+
+    <title>Lashmaker</title>
+</head>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h4>Add Customer</h4>
+
+<table class="table table-hover table-condensed">
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>customerName</th>
+        <th>numberPhone</th>
+        <th>bonusCount</th>
+        <th>visitCount</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="customer : ${customers}">
+        <td th:text="${customer.id}"></td>
+        <td th:text="${customer.customerName}"></td>
+        <td th:text="${customer.numberPhone}"></td>
+        <td th:text="${customer.visitCount}"></td>
+    </tr>
+    </tbody>
+</table>
+
+
+<form action="#" th:action="@{/lists/addcustomer}" th:object="${customer}" method="POST">
+
+    Name<input type="text" th:field="*{customerName}"/>
+    <br>
+    Number Phone<input type="text" th:field="*{numberPhone}" />
+    <br>
+    <input type="submit" value="Submit"/>
+</form>
+
+
+</body>
+</html>

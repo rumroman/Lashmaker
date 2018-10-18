@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" >
+<head lang="en" >
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+    <table class="table table-hover table-condensed">
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>customerName</th>
+            <th>personal info</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="master : ${masters}">
+            <td th:text="${master.id}"></td>
+            <td th:text="${master.masterName}"></td>
+            <td th:text="${master.personalInfo}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+
+
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+                <h4 class="modal-title">Add Master</h4>
+            </div>
+            <div class="modal-footer">
+                <div class="col-md-offset-3 col-md-6">
+                    <form class="form-horizontal"  method="POST" th:action="@{/lists/addmaster}" th:object="${master}">
+                        <div class="form-group">
+                            <p class="text-left">Name</p>
+                            <input class="form-control" type="text" th:field="*{masterName}" required="" />
+                        </div>
+                        <div class="form-group">
+                            <p class="text-left">Personal Info</p>
+                            <input class="form-control" type="text" th:field="*{personalInfo}" required="" />
+                        </div>
+
+                        <div class="btn btn-group-justified">
+
+                            <div class="btn-group">
+                                <button type="submit" class="btn btn-success">Save</button>
+                            </div>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Close</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!--<form action="#" th:action="@{/addmaster}" th:object="${master}" method="POST">-->
+
+
+
+        <!--Name<input type="text" th:field="*{masterName}" value="1"/>-->
+        <!--<br>-->
+        <!--Info<input type="text" th:field="*{personalInfo}" />-->
+        <!--<br>-->
+        <!--&lt;!&ndash;Name<input id="masterName" type="text" customerName="username" th:value="*{masterName}"/>&ndash;&gt;-->
+
+
+        <!--<input type="submit" value="Submit"/>-->
+    <!--</form>-->
+
+
+</body>
+</html>

@@ -1,0 +1,23 @@
+// Your custom styles
+$skins: () !default;
+$skins: map-merge((
+  "test": (
+          "skin-primary-color": #f9f9f9,
+          "skin-navbar": #f9f9f9,
+          "skin-footer-color": #f9f9f9,
+          "skin-accent": #f9f9f9,
+          "skin-flat": #f9f9f9,
+          "skin-sidenav-item": #f9f9f9,
+          "skin-sidenav-item-hover": #f9f9f9,
+          "skin-gradient-start": #f9f9f9,
+          "skin-gradient-end": #f9f9f9,
+          "skin-mask-kight": #f9f9f9,
+          "skin-mask-light": #f9f9f9,
+          "skin-mas-strong": #f9f9f9,
+          "skin-sn-child": #f9f9f9,
+          "skin-btn-primary": #f9f9f9,
+          "skin-btn-secondary": #f9f9f9,
+          "skin-btn-default": #f9f9f9,
+          "skin-text": #f9f9f9
+  )
+))

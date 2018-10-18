@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta charset="ISO-8859-1">
+
+    <title>Lashmaker</title>
+</head>
+<body>
+
+<h1>Main</h1>
+
+
+<form th:action="@{/lists/addmaster}">
+    <button type="submit">Add Master</button>
+</form>
+
+<form th:action="@{/lists/addcustomer}">
+    <button type="submit">Add Client</button>
+</form>
+
+<form th:action="@{/lists/addphoto}">
+    <button type="submit">Add Photo</button>
+</form>
+
+<form th:action="@{/lists/addaction}">
+    <button type="submit">Add Action</button>
+</form>
+
+<form th:action="@{/lists/addjournal}">
+    <button type="submit">Add Journal</button>
+</form>
+
+<form th:action="@{/lists/addprice}">
+    <button type="submit">Add Price</button>
+</form>
+
+<form th:action="@{/lists/addqualification}">
+    <button type="submit">Add Qualification</button>
+</form>
+
+<form th:action="@{/lists/addreview}">
+    <button type="submit">Add Review</button>
+</form>
+
+<form th:action="@{/lists/addblacklist}">
+    <button type="submit">Add BlackList</button>
+</form>
+
+<form th:action="@{/lists/customer}">
+    <button type="submit">Check Customer</button>
+</form>
+
+</body>
+</html>
