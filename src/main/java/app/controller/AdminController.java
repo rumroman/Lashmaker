@@ -1,8 +1,11 @@
 package app.controller;
 
+import app.auth.User;
+import app.auth.UserRepository;
 import app.model.*;
 import app.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,11 +24,15 @@ public class AdminController {
     private QualificationRepository qualificationRepository;
     private PhotoRepository photoRepository;
     private ReviewRepository reviewRepository;
+    private UserRepository userRepository;
 
 
     @Autowired
     public AdminController(EyeLashServiceRepository eyeLashServiceRepository,
-                           MasterRepository masterRepository, CustomerRepository customerRepository, JournalRepository journalRepository, ActionRepository actionRepository, BlackListRepository blackListRepository, QualificationRepository qualificationRepository, PhotoRepository photoRepository, ReviewRepository reviewRepository){
+                           MasterRepository masterRepository, CustomerRepository customerRepository,
+                           JournalRepository journalRepository, ActionRepository actionRepository,
+                           BlackListRepository blackListRepository, QualificationRepository qualificationRepository,
+                           PhotoRepository photoRepository, ReviewRepository reviewRepository, UserRepository userRepository){
         this.eyeLashServiceRepository = eyeLashServiceRepository;
         this.masterRepository = masterRepository;
         this.customerRepository = customerRepository;
@@ -35,6 +42,17 @@ public class AdminController {
         this.qualificationRepository = qualificationRepository;
         this.photoRepository = photoRepository;
         this.reviewRepository = reviewRepository;
+        this.userRepository = userRepository;
+        this.initUserEntity();
+
+
+    }
+
+    private void initUserEntity(){
+        User user = new User();
+        user.setUsername("client");
+        user.setPassword(new BCryptPasswordEncoder(11).encode("password"));
+        this.userRepository.save(user);
     }
 
 
