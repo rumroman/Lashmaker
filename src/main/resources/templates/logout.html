@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"  xmlns:th="http://www.thymeleaf.org/" layout:decorate="~{layout}" lang="ru">
+<head>
+    <title>Выход</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container main-content">
+        <ul class="list-group">
+            <li class="list-group-item list-group-item-info"><h3>Вы успешно вышли из системы</h3></li>
+        </ul>
+        <a th:href="@{/index}">Вернуться домой</a>
+    </div>
+</div>
+</body>
+</html>

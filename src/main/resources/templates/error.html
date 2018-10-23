@@ -1,0 +1,17 @@
+<!doctype html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"  xmlns:th="http://www.thymeleaf.org/" layout:decorate="~{layout}" lang="ru">
+<head>
+    <title>Ошибка</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container main-content">
+        <ul class="list-group">
+            <li class="list-group-item list-group-item-danger"><h3 th:text="${error}">Статус</h3></li>
+            <li class="list-group-item" th:text="'Status code: '+ ${status}"></li>
+        </ul>
+        <p><a href="/" th:href="@{/}">Вернуться на главную страницу</a></p>
+    </div>
+</div>
+</body>
+</html>

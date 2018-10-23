@@ -1,18 +1,30 @@
 package app.controller;
 
+import app.auth.AuthGroup;
+import app.auth.AuthGroupRepository;
 import app.auth.User;
 import app.auth.UserRepository;
 import app.model.*;
 import app.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Optional;
+
+/*
+        Нужно все конечные точки переименовать в существительные множественного числа
+ */
 @Controller
+@RequestMapping("/")
 public class AdminController {
 
     private EyeLashServiceRepository eyeLashServiceRepository;
@@ -25,6 +37,7 @@ public class AdminController {
     private PhotoRepository photoRepository;
     private ReviewRepository reviewRepository;
     private UserRepository userRepository;
+    private AuthGroupRepository authGroupRepository;
 
 
     @Autowired
@@ -32,7 +45,7 @@ public class AdminController {
                            MasterRepository masterRepository, CustomerRepository customerRepository,
                            JournalRepository journalRepository, ActionRepository actionRepository,
                            BlackListRepository blackListRepository, QualificationRepository qualificationRepository,
-                           PhotoRepository photoRepository, ReviewRepository reviewRepository, UserRepository userRepository){
+                           PhotoRepository photoRepository, ReviewRepository reviewRepository, UserRepository userRepository, AuthGroupRepository authGroupRepository){
         this.eyeLashServiceRepository = eyeLashServiceRepository;
         this.masterRepository = masterRepository;
         this.customerRepository = customerRepository;
@@ -43,6 +56,7 @@ public class AdminController {
         this.photoRepository = photoRepository;
         this.reviewRepository = reviewRepository;
         this.userRepository = userRepository;
+        this.authGroupRepository = authGroupRepository;
         this.initUserEntity();
 
 
@@ -52,11 +66,15 @@ public class AdminController {
         User user = new User();
         user.setUsername("client");
         user.setPassword(new BCryptPasswordEncoder(11).encode("password"));
+        AuthGroup authGroup = new AuthGroup();
+        authGroup.setUsername(user.getUsername());
+        authGroup.setAuthGroup("user");
         this.userRepository.save(user);
+        this.authGroupRepository.save(authGroup);
     }
 
 
-    @GetMapping("/")
+    @GetMapping({"/","/index"})
     public String index(Model model){
         System.out.println("INDEX");
         Iterable<EyeLashService> list = eyeLashServiceRepository.findAll();
@@ -65,13 +83,39 @@ public class AdminController {
             builder.append("id = " + service.getId() + " name = " + service.getEyeLashServiceName() + "\n");
         }
         model.addAttribute("message", builder);
-        return "my";
+        return "index";
+
+    }
+
+    @GetMapping(value = "/login")
+    public String getLoginPage(Model model) {
+        return "login";
+    }
+
+    @GetMapping(value="/logout-success")
+    public String getLogoutPage(Model model){
+        return "logout";
+    }
+
+    @GetMapping("/profile")
+    public String getProfilePage(Model model) {
+        return "profile";
+    }
+
+    @GetMapping("/profile/{id}")
+    @PreAuthorize("hasRole('user')")
+    public String getIdProfile(@PathVariable Integer id, Model model) {
+//        Просто в profile/html вставляем объект customer .
+        Customer customer = Optional.of(this.customerRepository.findById(id)).orElseThrow(throw new RuntimeException());
+
 
     }
 
 
 
+//    Example security request
     @GetMapping("/lists/customer")
+    @PreAuthorize("hasRole('role_admin')")
     public ModelAndView showCustomer() {
         ModelAndView modelAndView = new ModelAndView("lists/customer");
         return modelAndView;
