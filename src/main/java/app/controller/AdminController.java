@@ -12,10 +12,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Optional;
@@ -102,15 +99,17 @@ public class AdminController {
         return "profile";
     }
 
-    @GetMapping("/profile/{id}")
-    @PreAuthorize("hasRole('user')")
-    public String getIdProfile(@PathVariable Integer id, Model model) {
-//        Просто в profile/html вставляем объект customer .
-        Customer customer = Optional.of(this.customerRepository.findById(id)).orElseThrow(throw new RuntimeException());
+//    @GetMapping("/profile/{id}")
+//    @PreAuthorize("hasRole('user')")
+//    public String getIdProfile(@PathVariable Integer id, Model model) {
+////        Просто в profile/html вставляем объект customer .
+//        Customer customer = Optional.of(this.customerRepository.findById(id)).orElseThrow(throw new RuntimeException());
+//
+//
+//    }
 
-
-    }
-
+//    @GetMapping("/mybot")
+//
 
 
 //    Example security request
@@ -249,7 +248,6 @@ public class AdminController {
         modelAndView.addObject("review",new Review());
         return modelAndView;
     }
-
 }
 
 
