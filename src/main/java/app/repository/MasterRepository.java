@@ -1,7 +1,7 @@
 package app.repository;
 
-import app.model.Master;
+import app.entity.Master;
 import org.springframework.data.repository.CrudRepository;
 
-public interface MasterRepository extends CrudRepository<Master,Integer> {
+public interface MasterRepository extends CrudRepository<Master,Long> {
 }

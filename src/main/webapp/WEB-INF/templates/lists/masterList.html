@@ -16,7 +16,7 @@
         <tbody>
         <tr th:each="master : ${masters}">
             <td th:text="${master.id}"></td>
-            <td th:text="${master.masterName}"></td>
+            <td th:text="${master.name}"></td>
             <td th:text="${master.personalInfo}"></td>
         </tr>
         </tbody>
@@ -35,7 +35,7 @@
                     <form class="form-horizontal"  method="POST" th:action="@{/lists/addmaster}" th:object="${master}">
                         <div class="form-group">
                             <p class="text-left">Name</p>
-                            <input class="form-control" type="text" th:field="*{masterName}" required="" />
+                            <input class="form-control" type="text" th:field="*{name}" required="" />
                         </div>
                         <div class="form-group">
                             <p class="text-left">Personal Info</p>
@@ -64,11 +64,11 @@
 
 
 
-        <!--Name<input type="text" th:field="*{masterName}" value="1"/>-->
+        <!--Name<input type="text" th:field="*{name}" value="1"/>-->
         <!--<br>-->
         <!--Info<input type="text" th:field="*{personalInfo}" />-->
         <!--<br>-->
-        <!--&lt;!&ndash;Name<input id="masterName" type="text" customerName="username" th:value="*{masterName}"/>&ndash;&gt;-->
+        <!--&lt;!&ndash;Name<input id="name" type="text" customerName="username" th:value="*{name}"/>&ndash;&gt;-->
 
 
         <!--<input type="submit" value="Submit"/>-->

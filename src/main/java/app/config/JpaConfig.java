@@ -41,7 +41,7 @@
 //
 //        LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
 //        em.setDataSource(dataSource());
-//        em.setPackagesToScan("app/model","app/auth");
+//        em.setPackagesToScan("app/entity","app/auth");
 //
 //
 //        JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();

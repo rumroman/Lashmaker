@@ -1,7 +1,7 @@
 package app.repository;
 
-import app.model.Photo;
+import app.entity.Photo;
 import org.springframework.data.repository.CrudRepository;
 
-public interface PhotoRepository extends CrudRepository<Photo,Integer> {
+public interface PhotoRepository extends CrudRepository<Photo,Long> {
 }

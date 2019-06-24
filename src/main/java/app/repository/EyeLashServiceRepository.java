@@ -1,9 +1,9 @@
 package app.repository;
 
-import app.model.EyeLashService;
+import app.entity.EyeLashService;
 import org.springframework.data.repository.CrudRepository;
 
-public interface EyeLashServiceRepository extends CrudRepository<EyeLashService,Integer> {
+public interface EyeLashServiceRepository extends CrudRepository<EyeLashService,Long> {
 
    // List<EyeLashService> findByAll();
 

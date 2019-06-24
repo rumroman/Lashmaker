@@ -18,14 +18,14 @@
     <thead>
     <tr>
         <th>id</th>
-        <th>actionName</th>
+        <th>name</th>
         <th>description</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="action : ${actions}">
         <td th:text="${action.id}"></td>
-        <td th:text="${action.actionName}"></td>
+        <td th:text="${action.name}"></td>
         <td th:text="${action.description}"></td>
     </tr>
     </tbody>
@@ -34,7 +34,7 @@
 
 <form action="#" th:action="@{/addaction}" th:object="${action}" method="POST">
 
-    Action name<input type="text" th:field="*{actionName}"/>
+    Action name<input type="text" th:field="*{name}"/>
     <br>
     Description<input type="text" th:field="*{description}" />
     <br>

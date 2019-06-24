@@ -10,6 +10,7 @@ public class AuthGroup {
     @GeneratedValue(strategy = GenerationType.IDENTITY )
     private int id;
     private String username;
+    @Column(name = "auth_group")
     private String authGroup;
 
     public long getId() {

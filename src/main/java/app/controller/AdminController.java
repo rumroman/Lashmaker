@@ -4,10 +4,10 @@ import app.auth.AuthGroup;
 import app.auth.AuthGroupRepository;
 import app.auth.User;
 import app.auth.UserRepository;
-import app.model.*;
+import app.entity.*;
 import app.repository.*;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -15,13 +15,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Optional;
-
 /*
         Нужно все конечные точки переименовать в существительные множественного числа
  */
 @Controller
 @RequestMapping("/")
+@Slf4j
 public class AdminController {
 
     private EyeLashServiceRepository eyeLashServiceRepository;
@@ -30,18 +29,19 @@ public class AdminController {
     private JournalRepository journalRepository;
     private ActionRepository actionRepository;
     private BlackListRepository blackListRepository;
-    private QualificationRepository qualificationRepository;
     private PhotoRepository photoRepository;
     private ReviewRepository reviewRepository;
     private UserRepository userRepository;
     private AuthGroupRepository authGroupRepository;
 
 
+
+
     @Autowired
     public AdminController(EyeLashServiceRepository eyeLashServiceRepository,
                            MasterRepository masterRepository, CustomerRepository customerRepository,
                            JournalRepository journalRepository, ActionRepository actionRepository,
-                           BlackListRepository blackListRepository, QualificationRepository qualificationRepository,
+                           BlackListRepository blackListRepository,
                            PhotoRepository photoRepository, ReviewRepository reviewRepository, UserRepository userRepository, AuthGroupRepository authGroupRepository){
         this.eyeLashServiceRepository = eyeLashServiceRepository;
         this.masterRepository = masterRepository;
@@ -49,12 +49,18 @@ public class AdminController {
         this.journalRepository = journalRepository;
         this.actionRepository = actionRepository;
         this.blackListRepository = blackListRepository;
-        this.qualificationRepository = qualificationRepository;
         this.photoRepository = photoRepository;
         this.reviewRepository = reviewRepository;
         this.userRepository = userRepository;
         this.authGroupRepository = authGroupRepository;
-        this.initUserEntity();
+
+//        Action action = actionRepository.findById(1L).get();
+//        Master master = action.getMaster();
+//        log.info("Master : {}", master);
+
+
+        // System.out.println(new BCryptPasswordEncoder(11).encode("password"));
+        //initUserEntity();
 
 
     }
@@ -63,12 +69,17 @@ public class AdminController {
         User user = new User();
         user.setUsername("client");
         user.setPassword(new BCryptPasswordEncoder(11).encode("password"));
+        System.out.println(user.getPassword());
         AuthGroup authGroup = new AuthGroup();
         authGroup.setUsername(user.getUsername());
         authGroup.setAuthGroup("user");
         this.userRepository.save(user);
         this.authGroupRepository.save(authGroup);
+        CustomerFeedback customerFeedback = new CustomerFeedback();
     }
+
+
+
 
 
     @GetMapping({"/","/index"})
@@ -86,6 +97,7 @@ public class AdminController {
 
     @GetMapping(value = "/login")
     public String getLoginPage(Model model) {
+        System.out.println("LOOOOOOOOOOOOOOOOOOOOOOOOOOOOOGIN");
         return "login";
     }
 
@@ -101,7 +113,7 @@ public class AdminController {
 
 //    @GetMapping("/profile/{id}")
 //    @PreAuthorize("hasRole('user')")
-//    public String getIdProfile(@PathVariable Integer id, Model model) {
+//    public String getIdProfile(@PathVariable Integer id, Model entity) {
 ////        Просто в profile/html вставляем объект customer .
 //        Customer customer = Optional.of(this.customerRepository.findById(id)).orElseThrow(throw new RuntimeException());
 //
@@ -207,20 +219,6 @@ public class AdminController {
         return modelAndView;
     }
 
-    @PostMapping("/lists/addqualification")
-    public String saveQualification(Qualification qualification){
-        qualificationRepository.save(qualification);
-        return "redirect:/lists/addqualification";
-    }
-
-    @GetMapping("/lists/addqualification")
-    public ModelAndView showQualification(){
-        ModelAndView modelAndView = new ModelAndView("lists/qualificationList");
-        modelAndView.addObject("qualifications",qualificationRepository.findAll());
-        modelAndView.addObject("qualification",new Qualification());
-        return modelAndView;
-    }
-
     @PostMapping("/lists/addphoto")
     public String savePhoto(Photo photo){
         photoRepository.save(photo);
@@ -236,8 +234,8 @@ public class AdminController {
     }
 
     @PostMapping("/lists/addreview")
-    public String saveReview(Review review){
-        reviewRepository.save(review);
+    public String saveReview(CustomerFeedback customerFeedback){
+        reviewRepository.save(customerFeedback);
         return "redirect:/lists/addreview";
     }
 
@@ -245,7 +243,7 @@ public class AdminController {
     public ModelAndView showReview(){
         ModelAndView modelAndView = new ModelAndView("lists/reviewList");
         modelAndView.addObject("reviews",reviewRepository.findAll());
-        modelAndView.addObject("review",new Review());
+        modelAndView.addObject("review",new CustomerFeedback());
         return modelAndView;
     }
 }

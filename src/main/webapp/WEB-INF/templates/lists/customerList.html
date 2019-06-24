@@ -21,7 +21,7 @@
     <tr>
         <th>id</th>
         <th>customerName</th>
-        <th>numberPhone</th>
+        <th>phone</th>
         <th>bonusCount</th>
         <th>visitCount</th>
     </tr>
@@ -30,7 +30,7 @@
     <tr th:each="customer : ${customers}">
         <td th:text="${customer.id}"></td>
         <td th:text="${customer.customerName}"></td>
-        <td th:text="${customer.numberPhone}"></td>
+        <td th:text="${customer.phone}"></td>
         <td th:text="${customer.visitCount}"></td>
     </tr>
     </tbody>
@@ -41,7 +41,7 @@
 
     Name<input type="text" th:field="*{customerName}"/>
     <br>
-    Number Phone<input type="text" th:field="*{numberPhone}" />
+    Number Phone<input type="text" th:field="*{phone}" />
     <br>
     <input type="submit" value="Submit"/>
 </form>

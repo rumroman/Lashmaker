@@ -1,7 +1,7 @@
 package app.repository;
 
-import app.model.Review;
+import app.entity.CustomerFeedback;
 import org.springframework.data.repository.CrudRepository;
 
-public interface ReviewRepository extends CrudRepository<Review,Integer> {
+public interface ReviewRepository extends CrudRepository<CustomerFeedback,Long> {
 }

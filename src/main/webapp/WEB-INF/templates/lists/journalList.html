@@ -19,7 +19,7 @@
     <tr>
         <th>id</th>
         <th>customerName</th>
-        <th>masterName</th>
+        <th>name</th>
         <th>serviceName</th>
         <th>price</th>
         <th>date</th>
@@ -29,7 +29,7 @@
     <tr th:each="journal : ${journals}">
         <td th:text="${journal.id}"></td>
         <td th:text="${journal.customer.customerName}"></td>
-        <td th:text="${journal.eyeLashService.serviceMaster.masterName}"></td>
+        <td th:text="${journal.eyeLashService.serviceMaster.name}"></td>
         <td th:text="${journal.eyeLashService.eyeLashServiceName}"></td>
         <td th:text="${journal.eyeLashService.price}"></td>
     </tr>
@@ -47,7 +47,7 @@
     <select th:field="*{master}">
         <option th:each="master : ${masters}"
                 th:value="${master}"
-                th:text="${master.masterName}">masterName</option>
+                th:text="${master.name}">name</option>
     </select>
     <br>
     Date<input type="text" th:field="*{date}"/>

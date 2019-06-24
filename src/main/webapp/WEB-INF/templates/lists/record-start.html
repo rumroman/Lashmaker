@@ -18,7 +18,7 @@
     <tr th:each="customer : ${clients}">
         <td th:text="${customer.id}"></td>
         <td th:text="${customer.customerName}"></td>
-        <td th:text="${customer.numberPhone}"></td>
+        <td th:text="${customer.phone}"></td>
         <td th:text="${customer.visitCount}"></td>
     </tr>
     </tbody>
@@ -29,7 +29,7 @@
 <select th:field="*{master}">
     <option th:each="master : ${masters}"
             th:value="${master}"
-            th:text="${master.masterName}">masterName</option>
+            th:text="${master.name}">name</option>
 </select>
 
 </body>

@@ -1,7 +1,7 @@
 package app.repository;
 
-import app.model.Journal;
+import app.entity.Journal;
 import org.springframework.data.repository.CrudRepository;
 
-public interface JournalRepository extends CrudRepository<Journal,Integer> {
+public interface JournalRepository extends CrudRepository<Journal,Long> {
 }

@@ -1,7 +1,7 @@
 package app.repository;
 
-import app.model.BlackList;
+import app.entity.BlackList;
 import org.springframework.data.repository.CrudRepository;
 
-public interface BlackListRepository extends CrudRepository<BlackList,Integer> {
+public interface BlackListRepository extends CrudRepository<BlackList,Long> {
 }

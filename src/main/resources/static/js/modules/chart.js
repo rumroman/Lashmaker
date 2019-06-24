@@ -4953,7 +4953,7 @@ function interpolate(start, view, model, ease) {
 
 		target = model[key];
 
-		// if a value is added to the app.model after pivot() has been called, the view
+		// if a value is added to the app.entity after pivot() has been called, the view
 		// doesn't contain it, so let's initialize the view to the target value.
 		if (!view.hasOwnProperty(key)) {
 			view[key] = target;
@@ -5458,7 +5458,7 @@ module.exports = function(Chart) {
 		var height = boundingRect.bottom - boundingRect.top - paddingTop - paddingBottom;
 
 		// We divide by the current device pixel ratio, because the canvas is scaled up by that amount in each direction. However
-		// the backend app.model is in unscaled coordinates. Since we are going to deal with our app.model coordinates, we go back here
+		// the backend app.entity is in unscaled coordinates. Since we are going to deal with our app.entity coordinates, we go back here
 		mouseX = Math.round((mouseX - boundingRect.left - paddingLeft) / (width) * canvas.width / chart.currentDevicePixelRatio);
 		mouseY = Math.round((mouseY - boundingRect.top - paddingTop) / (height) * canvas.height / chart.currentDevicePixelRatio);
 
@@ -8173,7 +8173,7 @@ module.exports = function(Chart) {
 		return base;
 	}
 
-	// Private helper to create a tooltip item app.model
+	// Private helper to create a tooltip item app.entity
 	// @param element : the chart element (point, arc, bar) to create the tooltip item for
 	// @return : new tooltip item
 	function createTooltipItem(element) {
@@ -8193,7 +8193,7 @@ module.exports = function(Chart) {
 	}
 
 	/**
-	 * Helper to get the reset app.model for the tooltip
+	 * Helper to get the reset app.entity for the tooltip
 	 * @param tooltipOpts {Object} the tooltip options
 	 */
 	function getBaseModel(tooltipOpts) {
@@ -8515,8 +8515,8 @@ module.exports = function(Chart) {
 			var me = this;
 			var opts = me._options;
 
-			// Need to regenerate the app.model because its faster than using extend and it is necessary due to the optimization in Chart.Element.transition
-			// that does _view = _model if ease === 1. This causes the 2nd tooltip update to set properties in both the view and app.model at the same time
+			// Need to regenerate the app.entity because its faster than using extend and it is necessary due to the optimization in Chart.Element.transition
+			// that does _view = _model if ease === 1. This causes the 2nd tooltip update to set properties in both the view and app.entity at the same time
 			// which breaks any animations.
 			var existingModel = me._model;
 			var model = me._model = getBaseModel(opts);
@@ -10027,7 +10027,7 @@ var helpers = {
 	},
 
 	/**
-	 * Basic javascript inheritance based on the app.model created in Backbone.js
+	 * Basic javascript inheritance based on the app.entity created in Backbone.js
 	 */
 	inherits: function(extensions) {
 		var me = this;
@@ -11118,7 +11118,7 @@ module.exports = function() {
 		}
 
 		// Backward compatibility: until v3, we still need to support boundary values set on
-		// the app.model (scaleTop, scaleBottom and scaleZero) because some external plugins and
+		// the app.entity (scaleTop, scaleBottom and scaleZero) because some external plugins and
 		// controllers might still use it (e.g. the Smith chart).
 
 		if (fill === 'start') {
